@@ -1,5 +1,15 @@
 # Editor Agent Full v5
 
+## Merged skill (Claude-friendly)
+
+Репозиторий теперь содержит единый пакет `Literary-Text-Diagnostics/`:
+- `Skill.md` — объединённая логика диагностики и длинного редакторского отчёта
+- `resources/` — полный набор подключаемых документов
+
+Старые orchestration-артефакты (`core/ORCHESTRATOR.md`, `core/EXECUTION_GRAPH.md`, `core/MODULE_CONTEXT_POLICY.md`, `skills/*`, `prompt_wrappers/*`, `schemas/*`) остаются как legacy-материалы, но для merged-skill больше не требуются как самостоятельные сущности.
+
+---
+
 Полноценная библиотека для многошагового ИИ-агента редакторского анализа.
 
 ## Что внутри
