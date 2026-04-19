@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "passport",
+  "type": "object",
+  "properties": {
+    "text_type": {
+      "type": "string"
+    },
+    "dominant_mode": {
+      "type": "string"
+    },
+    "secondary_modes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "audience_guess": {
+      "type": "string"
+    },
+    "contract_guess": {
+      "type": "string"
+    },
+    "scope_limits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "text_type",
+    "dominant_mode",
+    "secondary_modes",
+    "scope_limits",
+    "confidence"
+  ]
+}

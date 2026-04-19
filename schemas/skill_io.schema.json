@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "skill_io_contract",
+  "type": "object",
+  "properties": {
+    "skill": {
+      "type": "string"
+    },
+    "inputs_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "inputs_optional": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "skill",
+    "inputs_required",
+    "outputs"
+  ]
+}

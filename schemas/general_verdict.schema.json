@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "general_verdict",
+  "type": "object",
+  "properties": {
+    "verdict_text": {
+      "type": "string",
+      "description": "5–10 sentences of direct editorial prose position"
+    },
+    "vitality": {
+      "type": "string",
+      "enum": ["alive", "partially alive", "dead"]
+    },
+    "problem_depth": {
+      "type": "string",
+      "enum": ["core", "structural", "surface"]
+    },
+    "recommended_action": {
+      "type": "string",
+      "enum": ["rewrite", "structural_fix", "line_edit", "publish_ready"]
+    },
+    "main_strength": {
+      "type": "string",
+      "description": "One specific sentence identifying the primary asset"
+    },
+    "main_failure": {
+      "type": "string",
+      "description": "One specific sentence identifying the primary defect"
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "verdict_text",
+    "vitality",
+    "problem_depth",
+    "recommended_action",
+    "main_strength",
+    "main_failure",
+    "confidence"
+  ]
+}

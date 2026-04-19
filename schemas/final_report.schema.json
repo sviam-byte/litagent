@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "final_report",
+  "type": "object",
+  "properties": {
+    "passport": {
+      "type": "object",
+      "description": "Corpus type, dominant mode, secondary modes, audience guess, scope limits"
+    },
+    "general_verdict": {
+      "$ref": "general_verdict.schema.json",
+      "description": "Section 2: editorial position before layer-by-layer breakdown"
+    },
+    "limits": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Corpus and analysis limitations"
+    },
+    "ai_detection": {
+      "type": "object",
+      "description": "Markers, counter-markers, confidence, alternative explanations"
+    },
+    "contract": {
+      "type": "object",
+      "description": "Reader contract: promise, delivery, mismatches"
+    },
+    "branch_analysis": {
+      "type": "object",
+      "description": "Fiction / nonfiction / hybrid diagnostic map"
+    },
+    "language": {
+      "type": "object",
+      "description": "Pathologies, tone/register, metaphor/abstraction"
+    },
+    "sentence": {
+      "type": "object",
+      "description": "Dominant sentence patterns and representative examples"
+    },
+    "paragraph": {
+      "type": "object",
+      "description": "Paragraph role map, dead paragraphs, cohesion"
+    },
+    "macro": {
+      "type": "object",
+      "description": "Opening, middle, ending, disproportion zones, lost promises"
+    },
+    "strengths": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "false_positive_risks": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "priorities": {
+      "type": "object",
+      "description": "Buckets: rewrite_now, structural_next, line_edit_later, cosmetic_last"
+    },
+    "revision_plan": {
+      "type": "object",
+      "description": "First pass, second pass, preserve elements"
+    }
+  },
+  "required": [
+    "passport",
+    "general_verdict",
+    "limits",
+    "priorities",
+    "revision_plan"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "finding",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "module": {
+      "type": "string"
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "corpus-limit",
+        "structural",
+        "semantic",
+        "epistemic",
+        "scene",
+        "paragraph",
+        "sentence",
+        "language",
+        "style",
+        "copy"
+      ]
+    },
+    "category": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "mechanism": {
+      "type": "string"
+    },
+    "evidence_spans": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "revision_implication": {
+      "type": "string"
+    },
+    "false_positive_risk": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "module",
+    "level",
+    "category",
+    "description",
+    "severity",
+    "confidence"
+  ]
+}
