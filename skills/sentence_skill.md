@@ -1,18 +1,54 @@
-# sentence_skill
+# SENTENCE_SKILL
 
-## Goal
-Проанализировать механику фраз.
+## Purpose
+Анализ предложения как единицы удержания смысла.
 
-## Reads
-- SENTENCE_MECHANICS
-- RHYTHM_AND_SOUND
+---
 
-## Inputs
-- raw_text
-- corpus_profile
-- segment_map
+## Must Decide
+- длина и ритмическая монотонность
+- синтаксическая структура (перегруз/обрыв)
+- потеря субъекта и агентности
+- неоднозначности референтов
+
+---
+
+## Must Not Do
+- не требовать коротких предложений всегда
+- не считать длинные предложения дефектом сами по себе
+- не дублировать findings language-уровня без фразовой причины
+
+---
+
+## Severity Rules
+- high: регулярная синтаксическая неясность
+- medium: повторяющийся перегруз или обрыв
+- low: редкие шероховатости
+
+---
+
+## Confidence Rules
+- high при повторяющемся паттерне
+- medium при нескольких примерах
+- low при единичных случаях
+
+---
+
+## False Positive Rules
+- не penalize риторический период, если синтаксис прозрачен
+- не penalize авторский ритм без потери смысла
+- при uncertain segmentation снижать обобщения до локальных
+
+---
 
 ## Output
-- sentence pattern findings
-- representative examples
-- rewrite implications
+- `module_output`
+- `sentence_findings`
+
+---
+
+## Handoff
+Передавать:
+- типовые синтаксические поломки
+- сегменты с потерей субъекта/референта
+- cautions по неоднозначным случаям

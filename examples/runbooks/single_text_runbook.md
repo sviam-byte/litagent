@@ -34,7 +34,7 @@
 
 Inputs: raw_text + corpus_profile + segment_map
 
-Сохрани: ai_findings (будет нужен для overall_verdict как summary).
+Сохрани: ai_findings + ai_signal.
 
 ---
 
@@ -44,7 +44,7 @@ Inputs: raw_text + corpus_profile + segment_map
 
 Inputs: raw_text + corpus_profile + segment_map
 
-Сохрани: claim_map.summary + contract_notes.summary.
+Сохрани: claim_map + contract_notes + epistemic_signal.
 
 ---
 
@@ -54,7 +54,7 @@ Inputs: raw_text + corpus_profile + segment_map
 
 Inputs: raw_text + corpus_profile + segment_map
 
-Сохрани: energy_map.summary.
+Сохрани: energy_map + macro_notes + propulsion_signal.
 
 ---
 
@@ -64,11 +64,11 @@ Inputs: raw_text + corpus_profile + segment_map
 
 Inputs:
 - raw_text + corpus_profile + segment_map
-- ai_findings.summary
-- claim_map.summary + contract_notes.summary
-- energy_map.summary
+- ai_signal
+- epistemic_signal
+- propulsion_signal
 
-НЕ передавай: branch/language/sentence findings (их ещё нет).
+НЕ передавай: branch/language/sentence findings (их ещё нет), prose-summary из ранних модулей.
 
 Результат: general_verdict — второй раздел финального отчёта.
 
@@ -93,9 +93,9 @@ Inputs: raw_text + corpus_profile + segment_map
 ## Шаги 7–9. Language Passes
 Запускай последовательно, каждый независимо:
 
-**Шаг 7:** language_wrapper (LANGUAGE_PATHOLOGIES, REGISTER_AND_TONE, METAPHOR_AND_ABSTRACTION, RHYTHM_AND_SOUND)
-**Шаг 8:** sentence_wrapper (SENTENCE_MECHANICS, RHYTHM_AND_SOUND)
-**Шаг 9:** paragraph_wrapper (PARAGRAPH_DYNAMICS, COHESION_AND_TRANSITIONS)
+**Шаг 7:** language_wrapper
+**Шаг 8:** sentence_wrapper
+**Шаг 9:** paragraph_wrapper
 
 Inputs каждого: raw_text + corpus_profile + segment_map
 
@@ -107,11 +107,12 @@ Inputs каждого: raw_text + corpus_profile + segment_map
 
 Inputs (выборочно):
 - raw_text + corpus_profile + segment_map
-- ai_findings, branch_analysis summary
+- ai_findings
+- branch_analysis
 - language/sentence/paragraph findings
-- energy_map
+- macro_notes
 
-НЕ передавай: general_verdict
+НЕ передавай: general_verdict prose.
 
 ---
 
@@ -119,9 +120,17 @@ Inputs (выборочно):
 **Файлы:** PRIORITIZATION, OUTPUT_CONTRACT, QUALITY_GATES
 **Промпт:** revision_plan_wrapper
 
-Inputs: все module summaries + general_verdict + strengths + cautions
+Inputs:
+- general_verdict
+- branch_analysis
+- language_findings
+- sentence_findings
+- paragraph_findings
+- strengths
+- cautions
+- conflict_notes
 
-Результат: финальный отчёт.
+Результат: priorities + revision_plan + final report draft.
 
 ---
 
