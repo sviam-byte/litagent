@@ -1,67 +1,74 @@
-# overall_verdict_skill
+# OVERALL_VERDICT_SKILL
 
-## Goal
-Сформулировать свёрнутую редакторскую позицию до детального разбора.
-Не резюмировать замечания, а дать ориентацию:
-текст живой или мёртвый, проблема в ядре или отделке, что делать дальше.
+## Purpose
+Сформулировать раннюю редакторскую позицию о тексте как целом.
+
+Этот модуль:
+- не резюмирует поздние находки;
+- не читает branch/language/sentence/paragraph prose;
+- опирается на `raw_text` + compact signals.
+
+---
 
 ## Reads
-- GENERAL_VERDICT
-- FALSE_POSITIVE_GUARD
-- CORE_SYSTEM
+- `core/GENERAL_VERDICT.md`
+- `core/FALSE_POSITIVE_GUARD.md`
+- `core/CORE_SYSTEM.md`
+- `core/DATA_CONTRACTS.md`
+
+---
 
 ## Inputs
-- raw_text
-- corpus_profile
-- segment_map
-- ai_findings.summary (from ai_detection_skill)
-- claim_map.summary (from epistemic_contract_skill)
-- contract_notes.summary (from epistemic_contract_skill)
-- energy_map.summary (from propulsion_macro_skill)
+- `raw_text`
+- `corpus_profile`
+- `segment_map`
+- `ai_signal`
+- `epistemic_signal`
+- `propulsion_signal`
+
+---
 
 ## Must Decide
-- vitality: alive | partially alive | dead
-- problem_depth: core | structural | surface
-- recommended_action: rewrite | structural_fix | line_edit | publish_ready
-- main_strength: одна конкретная фраза
-- main_failure: одна конкретная фраза
-- verdict_text: 5–10 предложений прозы
+- vitality: `alive | partially_alive | dead`
+- problem_depth: `core | structural | surface`
+- recommended_action: `rewrite | structural_fix | line_edit | publish_ready`
+- what-mostly-works (1 concise statement)
+- what-mostly-fails (1 concise statement)
+- final `general_verdict` in 5–10 sentences
+
+---
 
 ## Must Not Do
-- Не перечислять замечания — это не оглавление разбора.
-- Не писать более 10 предложений.
-- Не хвалить общими фразами ("интересный", "живой").
-- Не ругать общими фразами ("слабо", "нужна работа").
-- Не использовать информацию из branch/language/sentence модулей
-  (они ещё не запускались).
-- Не давать уверенность выше, чем оправдывает корпус.
+- не ссылаться на branch/language/sentence/paragraph outputs;
+- не строить вывод как список микродефектов;
+- не повышать confidence выше corpus limits;
+- не превращать ai-suspicion в единственное основание verdict.
+
+---
 
 ## Output Schema
-```json
-{
-  "module_name": "overall_verdict_skill",
-  "summary": "...",
-  "general_verdict": {
-    "verdict_text": "5–10 предложений",
-    "vitality": "alive | partially alive | dead",
-    "problem_depth": "core | structural | surface",
-    "recommended_action": "rewrite | structural_fix | line_edit | publish_ready",
-    "main_strength": "...",
-    "main_failure": "...",
-    "confidence": 0.0
-  },
-  "findings": [],
-  "strengths": [],
-  "cautions": [],
-  "unresolved": [],
-  "handoff_notes": []
-}
-```
+- `module_output`
+- `general_verdict` (по `general_verdict.schema.json`)
+- `findings` может быть пустым или минимальным
+- `handoff_notes` короткие, структурные
 
-## Calibration Notes
-- Если corpus_profile.is_fragment = true: снизить confidence,
-  добавить caution о неполноте корпуса.
-- Если ai_findings показывают high suspicion: учитывать в vitality,
-  но не делать это единственным основанием.
-- Если energy_map показывает stall_zones > 50% текста:
-  problem_depth скорее всего structural или core.
+---
+
+## Confidence Rules
+- high только если сигналы согласованы и корпус нефрагментарный
+- medium при частичной согласованности сигналов
+- low при fragment/uncertain segmentation/конфликте сигналов
+
+---
+
+## False Positive Rules
+- высокий ai suspicion не является доказательством «мёртвого текста» сам по себе
+- при uncertain segment routing избегать жёстких жанровых утверждений
+- при thin evidence снижать confidence и добавлять caution
+
+---
+
+## Handoff
+Передавать downstream:
+- 1–2 `handoff_notes` про главный риск и главный актив
+- caution, если confidence ограничен корпусом/сегментацией/конфликтом сигналов

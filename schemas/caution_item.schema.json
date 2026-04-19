@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "caution_item",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "insufficient_corpus",
+        "genre_exception",
+        "taste_only",
+        "possible_false_positive",
+        "segmentation_uncertain",
+        "evidence_too_thin"
+      ]
+    },
+    "description": { "type": "string" },
+    "related_finding_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "impact_on_confidence": { "type": "string" }
+  },
+  "required": [
+    "type",
+    "description",
+    "related_finding_ids",
+    "impact_on_confidence"
+  ]
+}

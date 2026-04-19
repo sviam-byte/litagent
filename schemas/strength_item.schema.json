@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "strength_item",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "level": { "type": "string" },
+    "description": { "type": "string" },
+    "mechanism": { "type": "string" },
+    "evidence_spans": { "type": "array" },
+    "protect_in_revision": { "type": "string" },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    }
+  },
+  "required": [
+    "level",
+    "description",
+    "mechanism",
+    "evidence_spans",
+    "protect_in_revision",
+    "confidence"
+  ]
+}

@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "finding",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
     "id": {
       "type": "string"
@@ -36,7 +37,21 @@
     "evidence_spans": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "start_anchor": {
+            "type": "string"
+          },
+          "end_anchor": {
+            "type": "string"
+          },
+          "quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start_anchor"
+        ]
       }
     },
     "severity": {
@@ -49,20 +64,18 @@
       ]
     },
     "confidence": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 1
-    },
-    "revision_implication": {
-      "type": "string"
-    },
-    "false_positive_risk": {
       "type": "string",
       "enum": [
         "low",
         "medium",
         "high"
       ]
+    },
+    "revision_implication": {
+      "type": "string"
+    },
+    "false_positive_risk": {
+      "type": "string"
     }
   },
   "required": [
@@ -72,6 +85,28 @@
     "category",
     "description",
     "severity",
-    "confidence"
+    "confidence",
+    "false_positive_risk"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "severity": {
+            "enum": [
+              "high",
+              "critical"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "mechanism",
+          "evidence_spans",
+          "revision_implication"
+        ]
+      }
+    }
   ]
 }

@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "short_report",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
     "passport": {
       "type": "object",
@@ -9,7 +10,7 @@
     },
     "general_verdict": {
       "$ref": "general_verdict.schema.json",
-      "description": "Section 2: editorial position, always second"
+      "description": "Editorial position, always early and near the top"
     },
     "top_findings": {
       "type": "array",
@@ -25,11 +26,20 @@
     },
     "ai_detection_summary": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
-        "suspicion_level": { "type": "string", "enum": ["low", "medium", "high"] },
-        "confidence": { "type": "number" },
-        "note": { "type": "string" }
-      }
+        "suspicion_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "confidence": {
+          "type": "number"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "required": ["suspicion_level", "confidence", "note"]
     },
     "revision_order": {
       "type": "array",
@@ -42,6 +52,7 @@
     "general_verdict",
     "top_findings",
     "strengths",
+    "ai_detection_summary",
     "revision_order"
   ]
 }
